@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Journey ♡</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5e6c8;
+    --gold: #c9a96e;
+    --rose: #c47a8a;
+    --deep: #0a0812;
+    --midnight: #100d1e;
+    --navy: #0e0c1b;
+    --purple-dark: #1a1530;
+    --text-soft: #d4bfa0;
+    --text-muted: #8a7a6a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  .stars {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse at top, #1a1530 0%, #0a0812 60%);
+  }
+  .stars::before, .stars::after {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,220,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 8%, rgba(255,255,220,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 20%, rgba(255,255,220,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 5%, rgba(255,255,220,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 12%, rgba(255,255,220,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 18%, rgba(255,255,220,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 35%, rgba(255,255,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 32% 42%, rgba(255,255,220,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 30%, rgba(255,255,220,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 38%, rgba(255,255,220,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 25%, rgba(255,255,220,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 55%, rgba(255,255,220,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 48% 48%, rgba(255,255,220,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 65%, rgba(255,255,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 60%, rgba(255,255,220,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 55%, rgba(255,255,220,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 35% 75%, rgba(255,255,220,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 72% 80%, rgba(255,255,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 12% 85%, rgba(255,255,220,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 55% 90%, rgba(255,255,220,0.7) 0%, transparent 100%);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; right: 0; z-index: 100;
+    padding: 1.5rem 2rem;
+    display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-end;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  nav a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem; letter-spacing: 0.15em;
+    color: rgba(245,230,200,0.5);
+    text-decoration: none; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--gold); }
+
+  .brand {
+    position: fixed; top: 1.5rem; left: 2rem; z-index: 100;
+    font-family: 'Dancing Script', cursive; font-size: 1rem;
+    color: rgba(245,230,200,0.4);
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+
+  nav.hidden, .brand.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(ellipse at 50% 0%, rgba(100,60,140,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(60,20,80,0.4) 0%, transparent 60%);
+  }
+  .hero-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 60px rgba(196,122,138,0.4);
+    animation: fadeUp 1.5s ease both;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1.5s 0.3s ease both;
+  }
+  .hero-btn {
+    display: inline-block;
+    padding: 0.75rem 2.5rem;
+    border: 1px solid rgba(196,169,110,0.4);
+    border-radius: 999px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem; letter-spacing: 0.2em;
+    color: var(--gold);
+    text-decoration: none; text-transform: uppercase;
+    transition: all 0.4s;
+    animation: fadeUp 1.5s 0.6s ease both;
+    cursor: pointer;
+  }
+  .hero-btn:hover {
+    background: rgba(196,169,110,0.1);
+    border-color: var(--gold);
+    box-shadow: 0 0 30px rgba(196,169,110,0.2);
+  }
+  .scroll-down {
+    position: absolute; bottom: 2rem;
+    font-size: 1.5rem; color: rgba(245,230,200,0.3);
+    animation: bounce 2s infinite;
+  }
+
+  .section-bg-1 { background: linear-gradient(to bottom, var(--deep), #0f0c1e, var(--deep)); }
+  .section-bg-2 { background: linear-gradient(to bottom, var(--deep), #120818, var(--deep)); }
+
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+  }
+  .panel {
+    padding: 4rem 3rem;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .panel-left { border-right: 1px solid rgba(245,230,200,0.07); }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--cream); margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .section-desc {
+    font-size: 0.8rem; color: var(--text-muted);
+    letter-spacing: 0.05em; margin-bottom: 2rem;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+  }
+
+  /* CHAT BUBBLES */
+  .chat-container {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 1.2rem;
+    max-width: 320px;
+    margin-bottom: 1.5rem;
+  }
+  .chat-header {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 0.8rem;
+  }
+  .chat-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, #7c4dff, #e91e8c);
+  }
+  .chat-name { font-size: 0.75rem; color: var(--cream); font-weight: 600; }
+  .chat-status { font-size: 0.6rem; color: #4caf50; }
+  .bubble { margin: 0.35rem 0; display: flex; }
+  .bubble.them { justify-content: flex-start; }
+  .bubble.me { justify-content: flex-end; }
+  .bubble-text {
+    max-width: 70%;
+    padding: 0.5rem 0.8rem;
+    border-radius: 16px;
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+  .them .bubble-text {
+    background: rgba(255,255,255,0.08);
+    color: var(--cream);
+    border-bottom-left-radius: 4px;
+  }
+  .me .bubble-text {
+    background: linear-gradient(135deg, #4a2d80, #7c3d8c);
+    color: #e8d5f5;
+    border-bottom-right-radius: 4px;
+  }
+  .bubble-time { font-size: 0.55rem; color: var(--text-muted); align-self: flex-end; margin: 0 0.3rem; }
+
+  /* POLAROID */
+  .polaroid-stack {
+    display: flex; flex-direction: column; gap: 1rem;
+    align-items: center;
+  }
+  .polaroid {
+    background: #f0e8d8;
+    padding: 0.6rem 0.6rem 2.2rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+    transform: rotate(-3deg);
+    transition: transform 0.3s;
+    max-width: 160px;
+  }
+  .polaroid:nth-child(2) { transform: rotate(2deg); }
+  .polaroid:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
+  .polaroid-img {
+    width: 140px; height: 110px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* PHOTO STRING */
+  .photo-string {
+    position: relative;
+    padding: 1.5rem 0;
+    overflow: hidden;
+  }
+  .string-line {
+    position: absolute; top: 2rem;
+    left: -5%; right: -5%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(196,169,110,0.4), transparent);
+  }
+  .photo-row {
+    display: flex; gap: 1.2rem;
+    padding: 0.5rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .photo-row::-webkit-scrollbar { display: none; }
+  .hung-photo {
+    flex-shrink: 0;
+    position: relative;
+    background: #f0e8d8;
+    padding: 0.5rem 0.5rem 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    transform: rotate(-2deg);
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  .hung-photo:nth-child(2) { transform: rotate(1.5deg); margin-top: 0.5rem; }
+  .hung-photo:nth-child(3) { transform: rotate(-1deg); }
+  .hung-photo:hover { transform: rotate(0deg) scale(1.05); z-index: 10; }
+  .hung-photo::before {
+    content: '';
+    position: absolute; top: -1rem; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 6px rgba(196,169,110,0.6);
+  }
+  .hung-photo img {
+    width: 120px; height: 100px;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.65rem;
+    color: #5a4030;
+    text-align: center;
+    margin-top: 0.2rem;
+  }
+
+  /* HANDWRITTEN NOTE */
+  .handwritten-note {
+    background: linear-gradient(135deg, #d4c4a0, #c8b890);
+    border-radius: 4px;
+    padding: 1.5rem;
+    max-width: 240px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+    transform: rotate(-1deg);
+  }
+  .handwritten-note::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #c9a070, #e0c090, #c9a070);
+  }
+  .note-lines {
+    border-bottom: 1px solid rgba(100,70,40,0.2);
+    padding: 0.25rem 0;
+    margin: 0.25rem 0;
+  }
+  .note-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.85rem;
+    color: #3a2810;
+    line-height: 1.8;
+  }
+  .note-pin {
+    position: absolute; top: -0.5rem; right: 1rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #ff6060, #cc0000);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  /* MUSIC PLAYER */
+  .music-player {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 1.2rem;
+    max-width: 280px;
+  }
+  .player-thumbnail {
+    width: 100%; height: 120px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1a0a2e, #2d1155, #0d1b4b);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .player-thumbnail::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(120,60,200,0.3), transparent);
+  }
+  .player-title { font-family: 'Dancing Script', cursive; font-size: 1rem; color: var(--cream); }
+  .player-artist { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .progress-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    cursor: pointer;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--rose), var(--gold));
+    border-radius: 2px;
+    width: 35%;
+    position: relative;
+  }
+  .progress-fill::after {
+    content: '';
+    position: absolute; right: -4px; top: 50%; transform: translateY(-50%);
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cream);
+  }
+  .player-times { display: flex; justify-content: space-between; font-size: 0.6rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .player-controls { display: flex; align-items: center; justify-content: center; gap: 1.2rem; }
+  .ctrl-btn {
+    background: none; border: none; color: var(--text-muted);
+    cursor: pointer; font-size: 0.9rem; transition: color 0.2s;
+  }
+  .ctrl-btn:hover { color: var(--cream); }
+  .ctrl-play {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose), #9c3d6a);
+    border: none; color: white;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(196,122,138,0.3);
+  }
+
+  /* LOVE LIST */
+  .love-list { list-style: none; }
+  .love-list li {
+    padding: 0.35rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    display: flex; align-items: baseline; gap: 0.5rem;
+  }
+  .love-list li::before { content: '—'; color: var(--rose); font-size: 0.8rem; }
+
+  /* CLOSING */
+  #closing {
+    min-height: 70vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 100%, rgba(80,20,100,0.4) 0%, transparent 60%);
+  }
+  .moon {
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%,
+      rgba(255,240,200,0.9), rgba(220,200,150,0.7), rgba(160,130,90,0.3), transparent 70%);
+    box-shadow: 0 0 60px rgba(255,240,200,0.15), 0 0 120px rgba(200,180,120,0.1);
+    position: absolute;
+    bottom: 5%; left: 50%; transform: translateX(-50%);
+    z-index: 0;
+  }
+  .closing-content { position: relative; z-index: 2; }
+  .closing-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: var(--cream);
+    text-shadow: 0 0 40px rgba(196,122,138,0.5);
+    margin-bottom: 1rem;
+  }
+  .closing-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+  .closing-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: rgba(138,122,106,0.6);
+    letter-spacing: 0.1em;
+  }
+  .silhouette { margin-top: 3rem; }
+  .lantern-glow {
+    position: absolute;
+    width: 150px; height: 200px;
+    background: radial-gradient(ellipse, rgba(196,169,110,0.15) 0%, transparent 70%);
+    bottom: 0; left: 10%;
+    pointer-events: none;
+  }
+
+  /* Small photo frames */
+  .small-frame {
+    background: #f0e8d8;
+    padding: 0.4rem 0.4rem 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  }
+  .small-frame img {
+    width: 60px; height: 60px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .floating { animation: float 4s ease-in-out infinite; }
+
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .panel-left { border-right: none; border-bottom: 1px solid rgba(245,230,200,0.07); }
+    .panel { padding: 2.5rem 1.5rem; }
+  }
+
+  .particle {
+    position: fixed;
+    width: 2px; height: 2px;
+    border-radius: 50%;
+    background: rgba(196,169,110,0.6);
+    pointer-events: none;
+    z-index: 0;
+    animation: particleFloat linear infinite;
+  }
+  @keyframes particleFloat {
+    from { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    to { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div id="particles"></div>
+<div class="brand">Our Journey ♡</div>
+
+<nav>
+  <span style="font-family:'Cormorant Garamond',serif; font-size:0.6rem; color:rgba(245,230,200,0.3); letter-spacing:0.2em; margin-bottom:0.3rem;">A Little Story for You ♪</span>
+  <a href="#awal-kenal">Awal Kenal</a>
+  <a href="#sama-sama-suka">sama sama suka</a>
+  <a href="#masa-bahagia">Masa Bahagia</a>
+  <a href="#pernah-terluka">Pernah Terluka</a>
+  <a href="#bersama">Bertahan Bersama</a>
+  <a href="#sekarang">Sampai Sekarang</a>
+  <a href="#untuk-kamu">Untuk Kamu</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div style="position:relative; z-index:2; text-align:center;">
+    <div class="hero-title">Hai Haii</div>
+    <div class="hero-sub">Yukk lihat perjalanan kitaa cuss hehe..</div>
+    <a class="hero-btn" onclick="document.getElementById('awal-kenal').scrollIntoView({behavior:'smooth'})">
+      Mulai Perjalanan
+    </a>
+  </div>
+  <div class="scroll-down">↓</div>
+  <div style="position:absolute; top:20%; left:10%; color:rgba(196,122,138,0.15); font-size:4rem; animation:float 5s ease-in-out infinite;">♡</div>
+  <div style="position:absolute; top:30%; right:12%; color:rgba(196,169,110,0.1); font-size:3rem; animation:float 6s 1s ease-in-out infinite;">♡</div>
+  <div style="position:absolute; bottom:20%; left:15%; color:rgba(196,122,138,0.1); font-size:2rem; animation:float 4s 0.5s ease-in-out infinite;">♡</div>
+</section>
+
+<!-- AWAL KENAL -->
+<section id="awal-kenal" class="section-bg-1">
+  <div class="two-col">
+    <div class="panel panel-left fade-in">
+      <div class="section-label">① Awal Kenal</div>
+      <div class="section-title">Awal Kenal</div>
+      <div class="section-desc">Semua berawal dari obrolan sederhana...</div>
+
+      <div class="chat-container">
+        <div class="chat-header">
+          <div class="chat-avatar"></div>
+          <div>
+            <div class="chat-name">izza</div>
+            <div class="chat-status">● online</div>
+          </div>
+        </div>
+        <div class="bubble me"><div class="bubble-text">Sorry mba gambarannya bagus 😭🙏🏻</div><div class="bubble-time">21:09</div></div>
+        <div class="bubble them"><div class="bubble-text">Hehe bisa aja mas, ga espek masnya salfok gambaranku 😭🙏🏻</div><div class="bubble-time">21:11</div></div>
+        <div class="bubble me"><div class="bubble-text">Bagus banget padahal</div><div class="bubble-time">21:12</div></div>
+        <div class="bubble me"><div class="bubble-text">Btw aku yo punya bunga matahari</div><div class="bubble-time">21:13</div></div>
+        <div class="bubble them"><div class="bubble-text">wkwk isok ae</div><div class="bubble-time">21:14</div></div>
+      </div>
+
+      <div style="font-family:'Dancing Script',cursive; font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+        "...dan dari sini, jadi sering banget<br>saling bertukar cerita." ♡
+      </div>
+    </div>
+
+    <!-- Polaroid: ganti nama file sesuai foto kamu -->
+    <div class="panel fade-in" style="align-items:center; justify-content:center;">
+      <div class="polaroid-stack">
+
+        <div class="polaroid" style="transform:rotate(-4deg);">
+          <!-- ✏️ Ganti "images/foto-awal-1.jpg" dengan nama foto kamu -->
+          <img src="images/foto1.jpeg" class="polaroid-img" alt="Kenangan pertama">
+        </div>
+
+        <div style="margin-top:1rem; text-align:center;">
+          <div style="font-family:'Dancing Script',cursive; font-size:1.4rem; color:var(--cream);">Kenangan pertama ✨</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:0.8rem; color:var(--text-muted); font-style:italic; margin-top:0.3rem;">
+            Malam yang nggak pernah dilupain
+          </div>
+        </div>
+
+        <div class="polaroid" style="transform:rotate(3deg); margin-top:0.5rem;">
+          <!-- ✏️ Ganti "images/foto-awal-2.jpg" dengan nama foto kamu -->
+          <img src="images/foto2.jpeg" class="polaroid-img" alt="Kenangan kedua">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASA BAHAGIA -->
+<section id="masa-bahagia" class="section-bg-2">
+  <div style="padding: 4rem 3rem;">
+    <div class="fade-in" style="margin-bottom:2rem;">
+      <div class="section-label">② Masa Bahagia</div>
+      <div class="section-title">Masa Bahagia</div>
+      <div class="section-desc">Banyak hal yang bikin kita-kita bahagia...</div>
+    </div>
+
+    <div class="photo-string fade-in">
+      <div class="string-line"></div>
+      <div class="photo-row" style="padding-top:1.5rem;">
+
+        <!-- ✏️ Ganti setiap src="images/bahagia-X.jpg" dengan nama foto kamu -->
+        <div class="hung-photo">
+          <img src="images/Foto3.jpeg" alt="Ketemu bareng">
+          <div class="photo-caption">Ketemu bareng</div>
+        </div>
+
+        <div class="hung-photo">
+          <img src="images/Foto4.jpeg" alt="Random foto">
+          <div class="photo-caption">Random foto ♡</div>
+        </div>
+
+        <div class="hung-photo">
+          <img src="images/Foto5.jpeg" alt="Mamm banget">
+          <div class="photo-caption">Mamm banget</div>
+        </div>
+
+        <div class="hung-photo">
+          <img src="images/Foto6.jpeg" alt="Selalu berdua">
+          <div class="photo-caption">Selalu berdua</div>
+        </div>
+
+        <div class="hung-photo">
+          <img src="images/Foto7.jpeg" alt="Malam indah">
+          <div class="photo-caption">Malam indah</div>
+        </div>
+
+        <div class="hung-photo">
+          <img src="images/Foto8.jpeg" alt="Kenangan kita">
+          <div class="photo-caption">Kenangan kita</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem; opacity:0.4; font-family:'Cormorant Garamond',serif; font-size:0.8rem; font-style:italic;">
+      ← geser untuk lihat lebih banyak →
+    </div>
+  </div>
+</section>
+
+<!-- PERNAH TERLUKA + BERTAHAN -->
+<section id="pernah-terluka" class="section-bg-1">
+  <div class="two-col">
+    <div class="panel panel-left fade-in" style="position:relative;">
+      <div class="lantern-glow"></div>
+      <div class="section-label">③ Pernah Terluka</div>
+      <div class="section-title">Pernah Terluka</div>
+      <div class="section-desc">Kita pernah patah, tapi nggak pernah menyerah...</div>
+
+      <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:1rem; max-width:280px; margin-bottom:1.5rem;">
+        <div class="bubble them" style="margin-bottom:0.3rem;"><div class="bubble-text" style="font-size:0.68rem;">akuloh gaeroh mood"an mbe irsat😭</div><div class="bubble-time">01:23</div></div>
+        <div class="bubble them" style="margin-bottom:0.3rem;"><div class="bubble-text" style="font-size:0.68rem;">maapin yaak, bosen soale ngejak gelud ae kok nde chat</div><div class="bubble-time">01:23</div></div>
+        <div class="bubble me" style="margin-bottom:0.3rem;"><div class="bubble-text" style="font-size:0.68rem;">fiks bosen iku, ket masuk kerja wes beda😭</div><div class="bubble-time">01:25</div></div>
+        <div class="bubble them" style="margin-bottom:0.3rem;"><div class="bubble-text" style="font-size:0.68rem;">aku yo nyadari kok, tapi rasaku aman kok beb</div><div class="bubble-time">01:28</div></div>
+        <div class="bubble me" style="margin-bottom:0.3rem;"><div class="bubble-text" style="font-size:0.68rem;">gpapa tak anggap kamu capee</div><div class="bubble-time">01:32</div></div>
+      </div>
+
+      <div style="font-family:'Dancing Script',cursive; font-size:0.85rem; color:var(--text-muted);">
+        "Tapi itu semua bikin kita makin kuat." ♡
+      </div>
+    </div>
+
+    <div class="panel fade-in" style="align-items:center; justify-content:center; gap:2rem; flex-direction:column;">
+      <div class="handwritten-note floating">
+        <div class="note-pin"></div>
+        <div class="note-text">
+          <div class="note-lines">Terima kasih...</div>
+          <div class="note-lines">sudah selalu bertahan,</div>
+          <div class="note-lines">meskipun kadang</div>
+          <div class="note-lines">sulit untuk</div>
+          <div class="note-lines">bertahan 🤍</div>
+        </div>
+      </div>
+      <div style="font-size:4rem; opacity:0.6; filter:sepia(50%);">🏮</div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPAI SEKARANG -->
+<section id="sekarang" class="section-bg-2">
+  <div class="two-col">
+    <div class="panel panel-left fade-in" style="align-items:center; justify-content:center;">
+      <div>
+        <div class="section-label" style="text-align:center;">⑤ Sampai Sekarang</div>
+        <div class="section-title" style="text-align:center; margin-bottom:0.3rem;">Sampai Sekarang</div>
+        <div class="section-desc" style="text-align:center; margin-bottom:1.5rem;">Masih banyak cerita yang belum kita tulis...</div>
+
+        <div class="music-player">
+          <div class="player-thumbnail">🎵</div>
+          <div class="player-title">Lagu Kita</div>
+          <div class="player-artist">Selalu ada ♡</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="player-times">
+            <span id="currentTime">1:45</span>
+            <span>5:12</span>
+          </div>
+          <div class="player-controls">
+            <button class="ctrl-btn" id="shuffleBtn">⇄</button>
+            <button class="ctrl-btn">⏮</button>
+            <button class="ctrl-play" id="playBtn" onclick="togglePlay()">▶</button>
+            <button class="ctrl-btn">⏭</button>
+            <button class="ctrl-btn">↺</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel fade-in" style="align-items:flex-start; justify-content:center;">
+      <div style="font-family:'Dancing Script',cursive; font-size:0.8rem; color:var(--rose); margin-bottom:1rem; letter-spacing:0.1em;">Yang aku suka dari kamu</div>
+      <ul class="love-list">
+        <li>Baik banget</li>
+        <li>Penyayang</li>
+        <li>Canda</li>
+        <li>Pengertian</li>
+        <li>Selalu memeluk</li>
+        <li>Dan masih banyak lagi...</li>
+      </ul>
+
+      <div style="margin-top:2rem; padding:1rem; border-left:2px solid rgba(196,122,138,0.3);">
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.9rem; color:var(--text-soft); line-height:1.6;">
+          "Kamu adalah bagian dari hari-hari terbaikku. Selalu."
+        </div>
+      </div>
+
+      <!-- ✏️ Ganti nama file foto kecil di bawah ini -->
+      <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+        <div class="small-frame" style="transform:rotate(-2deg);">
+          <img src="images/Foto9.jpeg" alt="foto kecil 1">
+        </div>
+        <div class="small-frame" style="transform:rotate(2deg);">
+          <img src="images/Foto10.jpeg" alt="foto kecil 2">
+        </div>
+        <div class="small-frame" style="transform:rotate(-1deg);">
+          <img src="images/Foto11.jpeg" alt="foto kecil 3">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="untuk-kamu" class="section-bg-1">
+  <div id="closing">
+    <div class="fade-in" style="position:absolute; left:3rem; top:50%; transform:translateY(-50%); max-width:200px; text-align:left; z-index:2;">
+      <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:1.2rem;">
+        <div style="font-family:'Dancing Script',cursive; font-size:0.8rem; color:var(--rose); margin-bottom:0.5rem;">♡</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:var(--text-soft); line-height:1.6; font-style:italic;">
+          "Terima kasih masih ada sampai hari ini."
+        </div>
+      </div>
+    </div>
+
+    <div class="closing-content fade-in">
+      <div style="font-family:'Dancing Script',cursive; font-size:0.9rem; color:var(--rose); letter-spacing:0.15em; margin-bottom:1rem;">♡ Untuk Kamu ♡</div>
+      <div class="closing-title">Aku masih memilih kamu.</div>
+      <div class="closing-sub">Hari ini, besok, dan selamanya.</div>
+      <div class="closing-en">I love you more than you know.</div>
+
+      <div class="silhouette">
+        <svg viewBox="0 0 200 100" width="200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="82" cy="30" r="10" fill="rgba(245,230,200,0.15)"/>
+          <path d="M72 45 Q82 80 92 45" fill="rgba(245,230,200,0.15)"/>
+          <circle cx="118" cy="30" r="10" fill="rgba(245,230,200,0.15)"/>
+          <path d="M108 45 Q118 80 128 45" fill="rgba(245,230,200,0.15)"/>
+          <line x1="92" y1="60" x2="108" y2="60" stroke="rgba(196,122,138,0.4)" stroke-width="2" stroke-linecap="round"/>
+          <text x="97" y="25" fill="rgba(196,122,138,0.5)" font-size="10" text-anchor="middle">♡</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="fade-in" style="position:absolute; right:3rem; top:50%; transform:translateY(-50%); max-width:200px; text-align:right; z-index:2;">
+      <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:1.2rem;">
+        <div style="font-family:'Dancing Script',cursive; font-size:0.8rem; color:var(--gold); margin-bottom:0.5rem; text-align:right;">♡</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:var(--text-soft); line-height:1.6; font-style:italic; text-align:right;">
+          "I love you more than you know."
+        </div>
+      </div>
+    </div>
+
+    <div class="moon"></div>
+  </div>
+
+  <div style="text-align:center; padding:2rem; border-top:1px solid rgba(255,255,255,0.05); position:relative; z-index:2;">
+    <div style="font-family:'Dancing Script',cursive; font-size:1rem; color:rgba(245,230,200,0.2);">Our Journey ♡</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:0.65rem; color:rgba(138,122,106,0.3); margin-top:0.3rem; letter-spacing:0.15em;">From Ir, just for you.</div>
+  </div>
+</section>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 12; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = Math.random() * 0.6 + 0.2;
+    container.appendChild(p);
+  }
+
+  // Hide nav & brand after hero
+  const heroSection = document.getElementById('hero');
+  const navEl = document.querySelector('nav');
+  const brandEl = document.querySelector('.brand');
+  window.addEventListener('scroll', () => {
+    const heroBottom = heroSection.getBoundingClientRect().bottom;
+    if (heroBottom < 0) { navEl.classList.add('hidden'); brandEl.classList.add('hidden'); }
+    else { navEl.classList.remove('hidden'); brandEl.classList.remove('hidden'); }
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Music player
+  let playing = false;
+  let seconds = 105;
+  const totalSeconds = 312;
+  let interval;
+
+  function togglePlay() {
+    playing = !playing;
+    const btn = document.getElementById('playBtn');
+    btn.textContent = playing ? '⏸' : '▶';
+    if (playing) {
+      interval = setInterval(() => {
+        seconds = Math.min(seconds + 1, totalSeconds);
+        updatePlayer();
+      }, 1000);
+    } else { clearInterval(interval); }
+  }
+
+  function updatePlayer() {
+    const pct = (seconds / totalSeconds) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    document.getElementById('currentTime').textContent = m + ':' + String(s).padStart(2,'0');
+  }
+
+  document.getElementById('shuffleBtn').addEventListener('click', function() {
+    this.style.color = this.style.color === 'rgb(196, 122, 138)' ? '' : 'rgb(196, 122, 138)';
+  });
+
+  document.querySelector('.progress-bar').addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    seconds = Math.round(pct * totalSeconds);
+    updatePlayer();
+  });
+</script>
+</body>
+</html>
